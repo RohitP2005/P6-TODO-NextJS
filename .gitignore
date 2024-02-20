@@ -1,0 +1,44 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output
+/.next/
+
+# Ignore development environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore npm debug logs
+npm-debug.log*
+
+# Ignore yarn lock file
+yarn.lock
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore IDE/Editor settings
+.idea/
+.vscode/
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore OS generated files
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+# Ignore Tailwind CSS build output
+styles/tailwind.css
+
+# Ignore JSON Server database file
+data/db.json
+
+# Ignore UUID generated files
+.next/
+out/
+
