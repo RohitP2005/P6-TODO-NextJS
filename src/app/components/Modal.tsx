@@ -1,6 +1,4 @@
-"use client";
 import React, { FormEventHandler, useState } from 'react';
-import { addTask } from '@/api';
 
 interface ModalProps {
     modalOpen: boolean;
@@ -9,18 +7,33 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen }) => {
     const [newTask, setNewTask] = useState<string>('');
+
     const handleSubmitTask: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
-        // Add a new task to the server
-        await addTask({
-            id: 3, // You may need to handle generating unique IDs
-            data: newTask // Get the value of newTask from the component's state
-        });
+        try {
+            // Send a POST request to the server
+            const response = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task: newTask }) // Convert the newTask value to JSON format and send it in the request body
+            });
 
-        console.log(newTask); // Log the new task text to the console
-        setNewTask(""); // Clear the newTask state, presumably to reset the form input
+            if (!response.ok) {
+                throw new Error('Failed to add task');
+            }
 
+            // Clear the newTask state after successful submission
+            setNewTask('');
+            
+            // Close the modal
+            setModalOpen(false);
+        } catch (error) {
+            console.error('Error adding task:', error);
+            // Handle error, show error message to the user, etc.
+        }
     };
 
     return (

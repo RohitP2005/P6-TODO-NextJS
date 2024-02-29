@@ -1,9 +1,9 @@
-import {ITask} from "../../../types/tasks";
 import React from "react";
 import Task from "./Task";
+import { TaskResult } from '@/db';
 
 interface TaskProps{
-tasks:ITask[]
+tasks:TaskResult[]
 }
 
 const TaskList: React.FC<TaskProps> = ({tasks}) =>{
@@ -21,7 +21,7 @@ const TaskList: React.FC<TaskProps> = ({tasks}) =>{
     </thead>
     <tbody>
       {tasks.map(task=>(
-        <Task key={task.id} task={task}/>
+        <Task key={task.task_no} task={task}/>
       ))}
     </tbody>
   </table>
